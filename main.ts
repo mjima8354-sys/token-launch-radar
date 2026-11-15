@@ -6,7 +6,7 @@
 // 3. Build radar scoring rows and check against validation gate.
 // 4. Output board.json and data.js.
 // 5. Copy dashboard assets and screenshot files, validating screenshot count (>=3) and valid filename characters.
-// 6. Generate final dossier.json summary.
+// 6. Generate canonical dossier summary (dossier.json).
 
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -99,6 +99,6 @@ writeFileSync(join(outputPath, 'dossier.json'), buildDossier(outputPath, dossier
 
 // Log completion status
 process.stdout.write(
-  `token radar: ${parsedSnapshot.protocols.length} protocols, ${parsedSnapshot.watchlist.length} on the watchlist, ${scoredBoard.length} rows scored (${radarMetrics.early_size} early, ${radarMetrics.live_size} live set aside)\n` +
-    `token radar: wrote ${join(outputPath, 'board.json')}, ${join(outputPath, 'data.js')}, ${join(outputPath, 'dashboard')} (3 files), ${join(outputPath, 'screenshots')} (${savedScreenshots.length} images) and ${join(outputPath, 'dossier.json')}\n`,
+  `token radar: ${parsedSnapshot.protocols.length} protocols, ${parsedSnapshot.watchlist.length} watchlist, ${scoredBoard.length} scored (${radarMetrics.early_size} early, ${radarMetrics.live_size} live set aside)\n` +
+    `token radar: wrote ${outputPath}: board.json, data.js, dashboard (3 files), screenshots (${savedScreenshots.length} images), dossier.json\n`,
 );
